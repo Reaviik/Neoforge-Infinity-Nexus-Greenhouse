@@ -1,0 +1,33 @@
+{
+  "parent": "infinity_nexus_greenhouse:greenhouse/root",
+  "criteria": {
+    "has_planter": {
+      "conditions": {
+        "items": [
+          {
+            "items": "infinity_nexus_greenhouse:planter_upgrade"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+  "description": {
+    "translate": "advancement.infinity_nexus_greenhouse.planter_description"
+  },
+  "icon": {
+    "count": 1,
+    "id": "infinity_nexus_greenhouse:planter_upgrade"
+  },
+  "title": {
+    "translate": "advancement.infinity_nexus_greenhouse.planter"
+  }
+},
+  "requirements": [
+    [
+      "has_planter"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

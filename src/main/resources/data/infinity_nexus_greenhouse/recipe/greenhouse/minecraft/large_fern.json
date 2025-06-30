@@ -1,0 +1,27 @@
+{
+  "type": "infinity_nexus_greenhouse:greenhouse",
+  "energy": 100,
+  "size": 0,
+  "plant": "minecraft:large_fern",
+  "properties": [
+    {
+      "property": "half=upper",
+      "replace": "none"
+    }
+  ],
+  "ingredient": {
+    "tag": "infinity_nexus_core:up_1"
+  },
+  "outputs": [
+    {
+      "item": "minecraft:large_fern",
+      "count": 1,
+      "chance": 0.1
+    },
+    {
+      "item": "minecraft:fern",
+      "count": 1,
+      "chance": 0.1
+    }
+  ]
+}

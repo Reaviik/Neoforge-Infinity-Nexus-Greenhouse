@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:netherite_ingot"
+    },
+    "B": {
+      "tag": "c:ingots/copper"
+    },
+    "C": {
+      "item": "infinity_nexus_core:advanced_component"
+    }
+  },
+  "pattern": [
+    "BAB",
+    "ACA",
+    "BAB"
+  ],
+  "result": {
+    "id": "infinity_nexus_core:refined_component",
+    "count": 1
+  },
+  "show_notification": true
+}

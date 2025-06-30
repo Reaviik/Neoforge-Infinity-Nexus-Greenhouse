@@ -1,0 +1,51 @@
+{
+  "itemGroup.infinity_nexus_greenhouse": "§x§9§0§0§0§9§dEstufa Infinity Nexus",
+  "config.jade.plugin_infinity_nexus_greenhouse.greenhouse_owner": "Dono da Estufa",
+
+  "tooltip.infinity_nexus.pressShift": "§bPressione §eShift §bpara mais informações",
+  "tooltip.infinity_nexus_greenhouse.output_slot_tooltip": "Slots de Saída",
+  "tooltip.infinity_nexus_greenhouse.hoe_slot_tooltip": "Slot de Enxada",
+  "tooltip.infinity_nexus_greenhouse.linking_slot_tooltip": "Slot de Vinculação",
+  "tooltip.infinity_nexus_greenhouse.fertilizer_slot_tooltip": "Slot de Fertilizante",
+  "tooltip.infinity_nexus_greenhouse.fuel_slot_tooltip": "Slot de Combustível",
+  "tooltip.infinity_nexus.chance": "Chance: ",
+  "tooltip.infinity_nexus_greenhouse.greenhouse_description": "Coloque a estufa dentro de uma área selada e cumpra os requisitos",
+
+  "block.infinity_nexus_greenhouse.greenhouse": "Estufa",
+
+  "item.infinity_nexus_greenhouse.fertilizer_upgrade": "Upgrade de Fertilizante",
+  "item.infinity_nexus_greenhouse.irrigate_upgrade": "Upgrade de Irrigação",
+
+  "infinity_nexus_mod.jei_information": "§9Esta máquina precisa de um componente para funcionar.",
+
+  "gui.infinity_nexus_greenhouse.show_area": "Mostrar área de cultivo",
+  "gui.infinity_nexus_greenhouse.owner": "Dono: ",
+  "gui.infinity_nexus_greenhouse.level": "Level: ",
+  "gui.infinity_nexus_greenhouse.redstone": "Redstone",
+  "gui.infinity_nexus_greenhouse.component": "Componente",
+  "gui.infinity_nexus_greenhouse.energy": "Energia",
+  "gui.infinity_nexus_greenhouse.light": "Nível de Luz",
+  "gui.infinity_nexus_greenhouse.size": "Tamanho",
+  "gui.infinity_nexus_greenhouse.plants": "Plantas",
+  "gui.infinity_nexus_greenhouse.fertilizer": "Fertilizante",
+  "gui.infinity_nexus_greenhouse.slot": "Slot",
+  "gui.infinity_nexus_greenhouse.link": "Vinculo: ",
+  "gui.infinity_nexus_greenhouse.link_on": "Vinculado",
+  "gui.infinity_nexus_greenhouse.link_off": "Não Vinculado",
+  "gui.infinity_nexus_greenhouse.working": "Funcionando",
+  "gui.infinity_nexus_greenhouse.villager": "Aldeão Fazendeiro",
+
+  "chat.infinity_nexus_greenhouse.greenhouse_is_full": "§cSua estufa está cheia!",
+  "chat.infinity_nexus_greenhouse.tp_player_error": "§cComando indisponível para jogadores",
+  "chat.infinity_nexus_greenhouse.tp_player_error_0": "§cErro ao teleportar o jogador!",
+  "chat.infinity_nexus_greenhouse.tp_player_success": "§bTeleportado com sucesso para a estufa!",
+  "chat.infinity_nexus_greenhouse.tp_dimension_error": "§cDimensão inválida: ",
+
+  "advancement.infinity_nexus_greenhouse.start": "O início da agricultura",
+  "advancement.infinity_nexus_greenhouse.irrigate": "Irrigação automática!",
+  "advancement.infinity_nexus_greenhouse.irrigate_description": "Chega de blocos de água escondidos! Agora você só precisa alimentar a estufa com água diretamente",
+  "advancement.infinity_nexus_greenhouse.fertilizer": "Fertilização automática!",
+  "advancement.infinity_nexus_greenhouse.fertilizer_description": "Agora você pode acelerar o crescimento das plantas automaticamente utilizando fertilizantes",
+  "advancement.infinity_nexus_greenhouse.planter": "Plantação automática",
+  "advancement.infinity_nexus_greenhouse.planter_description": "Sementes no slot de plantação são plantadas automaticamente nas terras aradas dentro da estufa"
+}

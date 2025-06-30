@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:bone_meal"
+    },
+    "B": {
+      "tag": "c:ingots/copper"
+    },
+    "C": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "pattern": [
+    "BAB",
+    "ACA",
+    "BAB"
+  ],
+  "result": {
+    "id": "infinity_nexus_greenhouse:fertilizer_upgrade",
+    "count": 1
+  },
+  "show_notification": true
+}

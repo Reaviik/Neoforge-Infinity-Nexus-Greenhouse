@@ -1,0 +1,25 @@
+{
+  "type": "infinity_nexus_greenhouse:greenhouse",
+  "energy": 100,
+  "size": 0,
+  "plant": "minecraft:pitcher_crop",
+  "properties": [
+    {
+      "property": "age=4",
+      "replace": "none"
+    }
+  ],
+  "ingredient": {
+    "tag": "infinity_nexus_core:up_1"
+  },
+  "outputs": [
+    {
+      "item": "minecraft:pitcher_plant",
+      "chance": 1.0
+    },
+    {
+      "item": "minecraft:pitcher_pod",
+      "chance": 0.1
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "type": "infinity_nexus_greenhouse:greenhouse",
+  "energy": 100,
+  "size": 0,
+  "plant": "minecraft:bee_nest",
+  "properties": [
+    {
+      "property": "honey_level=5",
+      "replace": "none"
+    }
+  ],
+  "ingredient": {
+    "tag": "infinity_nexus_core:up_1"
+  },
+  "outputs": [
+    {
+      "item": "minecraft:honeycomb",
+      "count": 1,
+      "chance": 1.0
+    },
+    {
+      "item": "minecraft:honeycomb",
+      "count": 1,
+      "chance": 1.0
+    },
+    {
+      "item": "minecraft:honeycomb",
+      "count": 1,
+      "chance": 1.0
+    },
+    {
+      "item": "minecraft:honeycomb",
+      "count": 1,
+      "chance": 1.0
+    },
+    {
+      "item": "minecraft:honeycomb",
+      "count": 1,
+      "chance": 1.0
+    }
+  ]
+}

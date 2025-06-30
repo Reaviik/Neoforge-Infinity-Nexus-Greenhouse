@@ -1,0 +1,27 @@
+{
+  "type": "infinity_nexus_greenhouse:greenhouse",
+  "energy": 100,
+  "size": 0,
+  "plant": "minecraft:tall_grass",
+  "properties": [
+    {
+      "property": "half=upper",
+      "replace": "minecraft:short_grass"
+    }
+  ],
+  "ingredient": {
+    "tag": "infinity_nexus_core:up_1"
+  },
+  "outputs": [
+    {
+      "item": "minecraft:short_grass",
+      "count": 1,
+      "chance": 0.2
+    },
+    {
+      "item": "minecraft:tall_grass",
+      "count": 1,
+      "chance": 0.1
+    }
+  ]
+}

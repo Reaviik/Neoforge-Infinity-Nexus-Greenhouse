@@ -1,0 +1,22 @@
+{
+  "type": "infinity_nexus_greenhouse:greenhouse",
+  "energy": 100,
+  "size": 0,
+  "plant": "minecraft:pumpkin",
+  "properties": [
+    {
+      "property": "none",
+      "replace": "minecraft:air"
+    }
+  ],
+  "ingredient": {
+    "tag": "infinity_nexus_core:up_1"
+  },
+  "outputs": [
+    {
+      "item": "minecraft:pumpkin",
+      "count": 1,
+      "chance": 1.0
+    }
+  ]
+}

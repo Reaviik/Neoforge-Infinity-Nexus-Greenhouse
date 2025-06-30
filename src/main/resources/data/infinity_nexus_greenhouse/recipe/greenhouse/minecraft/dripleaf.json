@@ -1,0 +1,25 @@
+{
+  "type": "infinity_nexus_greenhouse:greenhouse",
+  "energy": 100,
+  "size": 0,
+  "plant": "minecraft:big_dripleaf",
+  "properties": [
+    {
+      "property": "tilt=none",
+      "replace": "none"
+    }
+  ],
+  "ingredient": {
+    "tag": "infinity_nexus_core:up_1"
+  },
+  "outputs": [
+    {
+      "item": "minecraft:big_dripleaf",
+      "chance": 0.2
+    },
+    {
+      "item": "minecraft:small_dripleaf",
+      "chance": 0.1
+    }
+  ]
+}

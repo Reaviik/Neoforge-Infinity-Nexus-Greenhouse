@@ -1,0 +1,32 @@
+{
+  "type": "infinity_nexus_greenhouse:greenhouse",
+  "energy": 100,
+  "size": 0,
+  "plant": "minecraft:cocoa",
+  "properties": [
+    {
+      "property": "age=2",
+      "replace": "none"
+    }
+  ],
+  "ingredient": {
+    "tag": "infinity_nexus_core:up_1"
+  },
+  "outputs": [
+    {
+      "item": "minecraft:cocoa_beans",
+      "count": 1,
+      "chance": 1.0
+    },
+    {
+      "item": "minecraft:cocoa_beans",
+      "count": 1,
+      "chance": 1.0
+    },
+    {
+      "item": "minecraft:cocoa_beans",
+      "count": 1,
+      "chance": 1.0
+    }
+  ]
+}

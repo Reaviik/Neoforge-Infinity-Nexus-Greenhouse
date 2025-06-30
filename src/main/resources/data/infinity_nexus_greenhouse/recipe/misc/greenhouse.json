@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "tag": "c:glass_blocks"
+    },
+    "B": {
+      "item": "minecraft:black_concrete"
+    },
+    "C": {
+      "tag": "c:ingots/copper"
+    },
+    "D": {
+      "item": "minecraft:mud"
+    }
+  },
+  "pattern": [
+    "BAB",
+    "A A",
+    "CDC"
+  ],
+  "result": {
+    "id": "infinity_nexus_greenhouse:greenhouse",
+    "count": 1
+  },
+  "show_notification": true
+}

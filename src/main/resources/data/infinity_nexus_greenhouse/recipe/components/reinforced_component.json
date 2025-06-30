@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:heart_of_the_sea"
+    },
+    "B": {
+      "tag": "c:ingots/copper"
+    },
+    "C": {
+      "item": "infinity_nexus_core:basic_component"
+    }
+  },
+  "pattern": [
+    "BAB",
+    "ACA",
+    "BAB"
+  ],
+  "result": {
+    "id": "infinity_nexus_core:reinforced_component",
+    "count": 1
+  },
+  "show_notification": true
+}

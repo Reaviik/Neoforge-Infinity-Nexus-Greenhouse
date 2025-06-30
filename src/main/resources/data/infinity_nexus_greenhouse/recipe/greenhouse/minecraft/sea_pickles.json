@@ -1,0 +1,21 @@
+{
+  "type": "infinity_nexus_greenhouse:greenhouse",
+  "energy": 100,
+  "size": 0,
+  "plant": "minecraft:sea_pickle",
+  "properties": [
+    {
+      "property": "waterlogged=true",
+      "replace": "none"
+    }
+  ],
+  "ingredient": {
+    "tag": "infinity_nexus_core:up_1"
+  },
+  "outputs": [
+    {
+      "item": "minecraft:sea_pickle",
+      "chance": 1.0
+    }
+  ]
+}

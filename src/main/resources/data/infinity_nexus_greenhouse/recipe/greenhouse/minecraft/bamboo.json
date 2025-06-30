@@ -1,0 +1,21 @@
+{
+  "type": "infinity_nexus_greenhouse:greenhouse",
+  "energy": 100,
+  "size": 1,
+  "plant": "minecraft:bamboo",
+  "properties": [
+    {
+      "property": "age=0",
+      "replace": "minecraft:bamboo"
+    }
+  ],
+  "ingredient": {
+    "tag": "infinity_nexus_core:up_1"
+  },
+  "outputs": [
+    {
+      "item": "minecraft:bamboo",
+      "chance": 0.2
+    }
+  ]
+}

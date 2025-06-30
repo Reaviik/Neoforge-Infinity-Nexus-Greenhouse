@@ -1,0 +1,25 @@
+{
+  "type": "infinity_nexus_greenhouse:greenhouse",
+  "energy": 100,
+  "size": 0,
+  "plant": "minecraft:weeping_vines_plants",
+  "properties": [
+    {
+      "property": "age=0",
+      "replace": "none"
+    }
+  ],
+  "ingredient": {
+    "tag": "infinity_nexus_core:up_1"
+  },
+  "outputs": [
+    {
+      "item": "minecraft:weeping_vines",
+      "chance": 0.2
+    },
+    {
+      "item": "minecraft:crimson_roots",
+      "chance": 0.1
+    }
+  ]
+}

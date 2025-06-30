@@ -1,0 +1,42 @@
+{
+  "type": "infinity_nexus_greenhouse:greenhouse",
+  "energy": 100,
+  "size": 0,
+  "plant": "minecraft:mangrove_propagule",
+  "properties": [
+    {
+      "property": "stage=0",
+      "replace": "none"
+    }
+  ],
+  "ingredient": {
+    "tag": "infinity_nexus_core:up_1"
+  },
+  "outputs": [
+    {
+      "item": "minecraft:mangrove_log",
+      "count": 1,
+      "chance": 0.3
+    },
+    {
+      "item": "minecraft:mangrove_leaves",
+      "count": 1,
+      "chance": 0.5
+    },
+    {
+      "item": "minecraft:stick",
+      "count": 1,
+      "chance": 0.2
+    },
+    {
+      "item": "minecraft:mangrove_roots",
+      "count": 1,
+      "chance": 0.1
+    },
+    {
+      "item": "minecraft:muddy_mangrove_roots",
+      "count": 1,
+      "chance": 0.1
+    }
+  ]
+}

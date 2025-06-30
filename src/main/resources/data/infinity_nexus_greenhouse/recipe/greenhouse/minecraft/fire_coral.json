@@ -1,0 +1,25 @@
+{
+  "type": "infinity_nexus_greenhouse:greenhouse",
+  "energy": 100,
+  "size": 0,
+  "plant": "minecraft:fire_coral",
+  "properties": [
+    {
+      "property": "waterlogged=true",
+      "replace": "none"
+    }
+  ],
+  "ingredient": {
+    "tag": "infinity_nexus_core:up_1"
+  },
+  "outputs": [
+    {
+      "item": "minecraft:fire_coral",
+      "chance": 0.2
+    },
+    {
+      "item": "minecraft:fire_coral_fan",
+      "chance": 0.1
+    }
+  ]
+}

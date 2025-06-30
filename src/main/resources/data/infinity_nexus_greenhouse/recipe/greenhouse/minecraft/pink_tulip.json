@@ -1,0 +1,22 @@
+{
+  "type": "infinity_nexus_greenhouse:greenhouse",
+  "energy": 100,
+  "size": 0,
+  "plant": "minecraft:pink_tulip",
+  "properties": [
+    {
+      "property": "none",
+      "replace": "none"
+    }
+  ],
+  "ingredient": {
+    "tag": "infinity_nexus_core:up_1"
+  },
+  "outputs": [
+    {
+      "item": "minecraft:pink_tulip",
+      "count": 1,
+      "chance": 0.1
+    }
+  ]
+}

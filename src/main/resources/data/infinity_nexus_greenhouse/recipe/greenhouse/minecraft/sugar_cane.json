@@ -1,0 +1,22 @@
+{
+  "type": "infinity_nexus_greenhouse:greenhouse",
+  "energy": 100,
+  "size": 1,
+  "plant": "minecraft:sugar_cane",
+  "properties": [
+    {
+      "property": "none",
+      "replace": "minecraft:air"
+    }
+  ],
+  "ingredient": {
+    "tag": "infinity_nexus_core:up_1"
+  },
+  "outputs": [
+    {
+      "item": "minecraft:sugar_cane",
+      "count": 1,
+      "chance": 1.0
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "itemGroup.infinity_nexus_greenhouse": "§x§9§0§0§0§9§dInfinity Nexus Greenhouse",
+  "config.jade.plugin_infinity_nexus_greenhouse.greenhouse_owner": "Greenhouse Owner",
+
+  "tooltip.infinity_nexus.pressShift": "§bPress §eShift §bfor more info",
+  "tooltip.infinity_nexus_greenhouse.output_slot_tooltip": "Output Slots",
+  "tooltip.infinity_nexus_greenhouse.hoe_slot_tooltip": "Hoe Slot",
+  "tooltip.infinity_nexus_greenhouse.linking_slot_tooltip": "Linking Tool Slot",
+  "tooltip.infinity_nexus_greenhouse.fertilizer_slot_tooltip": "Fertilizer Slot",
+  "tooltip.infinity_nexus_greenhouse.fuel_slot_tooltip": "Fuel Slot",
+  "tooltip.infinity_nexus.chance": "§bChance: ",
+  "tooltip.infinity_nexus_greenhouse.greenhouse_description": "Place this machine in a sealed area and meet the requirements",
+
+  "block.infinity_nexus_greenhouse.greenhouse": "Greenhouse",
+
+  "item.infinity_nexus_greenhouse.fertilizer_upgrade": "Fertilizer Upgrade",
+  "item.infinity_nexus_greenhouse.irrigate_upgrade": "Irrigation Upgrade",
+
+  "infinity_nexus_mod.jei_information": "§9This machine requires a component to function.",
+
+  "gui.infinity_nexus_greenhouse.show_area": "Show Growing Area",
+  "gui.infinity_nexus_greenhouse.owner": "Owner: ",
+  "gui.infinity_nexus_greenhouse.level": "Tier: ",
+  "gui.infinity_nexus_greenhouse.redstone": "Redstone",
+  "gui.infinity_nexus_greenhouse.component": "Component",
+  "gui.infinity_nexus_greenhouse.energy": "Energy",
+  "gui.infinity_nexus_greenhouse.light": "Light Level",
+  "gui.infinity_nexus_greenhouse.size": "Size",
+  "gui.infinity_nexus_greenhouse.plants": "Plants",
+  "gui.infinity_nexus_greenhouse.fertilizer": "Fertilizer",
+  "gui.infinity_nexus_greenhouse.slot": "Slot",
+  "gui.infinity_nexus_greenhouse.link": "Link: ",
+  "gui.infinity_nexus_greenhouse.link_on": "Linked",
+  "gui.infinity_nexus_greenhouse.link_off": "§cUnlinked",
+  "gui.infinity_nexus_greenhouse.working": "Working",
+  "gui.infinity_nexus_greenhouse.villager": "Farmer Villager",
+
+  "chat.infinity_nexus_greenhouse.greenhouse_is_full": "§cYour greenhouse is full!",
+  "chat.infinity_nexus_greenhouse.tp_player_error": "§cCommand unavailable for players",
+  "chat.infinity_nexus_greenhouse.tp_player_error_0": "§cFailed to teleport player!",
+  "chat.infinity_nexus_greenhouse.tp_player_success": "§bSuccessfully teleported to greenhouse!",
+  "chat.infinity_nexus_greenhouse.tp_dimension_error": "§cInvalid dimension: ",
+
+  "advancement.infinity_nexus_greenhouse.start": "The Beginning of Agriculture",
+  "advancement.infinity_nexus_greenhouse.irrigate": "Automated Irrigation!",
+  "advancement.infinity_nexus_greenhouse.irrigate_description": "No more hidden water blocks! Now you can supply water directly to the greenhouse",
+  "advancement.infinity_nexus_greenhouse.fertilizer": "Auto-Fertilization!",
+  "advancement.infinity_nexus_greenhouse.fertilizer_description": "Now you can speed up plant growth automatically by using fertilizers",
+  "advancement.infinity_nexus_greenhouse.planter": "Autonomous Farming",
+  "advancement.infinity_nexus_greenhouse.planter_description": "Seeds in the planting slot are automatically planted on farmland inside the greenhouse"
+}

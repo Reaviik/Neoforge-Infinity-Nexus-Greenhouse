@@ -1,0 +1,32 @@
+{
+  "type": "infinity_nexus_greenhouse:greenhouse",
+  "energy": 100,
+  "size": 0,
+  "plant": "minecraft:oak_sapling",
+  "properties": [
+    {
+      "property": "stage=0",
+      "replace": "none"
+    }
+  ],
+  "ingredient": {
+    "tag": "infinity_nexus_core:up_1"
+  },
+  "outputs": [
+    {
+      "item": "minecraft:oak_log",
+      "count": 1,
+      "chance": 0.3
+    },
+    {
+      "item": "minecraft:oak_leaves",
+      "count": 1,
+      "chance": 0.5
+    },
+    {
+      "item": "minecraft:stick",
+      "count": 1,
+      "chance": 0.2
+    }
+  ]
+}

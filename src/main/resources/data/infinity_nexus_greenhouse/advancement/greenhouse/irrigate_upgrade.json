@@ -1,0 +1,33 @@
+{
+  "parent": "infinity_nexus_greenhouse:greenhouse/root",
+  "criteria": {
+    "has_irrigate": {
+      "conditions": {
+        "items": [
+          {
+            "items": "infinity_nexus_greenhouse:irrigate_upgrade"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+  "description": {
+    "translate": "advancement.infinity_nexus_greenhouse.irrigate_description"
+  },
+  "icon": {
+    "count": 1,
+    "id": "infinity_nexus_greenhouse:irrigate_upgrade"
+  },
+  "title": {
+    "translate": "advancement.infinity_nexus_greenhouse.irrigate"
+  }
+},
+  "requirements": [
+    [
+      "has_irrigate"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

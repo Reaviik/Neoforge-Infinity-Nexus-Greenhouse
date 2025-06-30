@@ -1,0 +1,43 @@
+{
+  "values": [
+    "infinity_nexus_greenhouse:greenhouse",
+    "infinity_nexus_greenhouse:stone_structure",
+    "infinity_nexus_greenhouse:copper_structure",
+    "infinity_nexus_greenhouse:iron_structure",
+    "infinity_nexus_greenhouse:gold_structure",
+    "infinity_nexus_greenhouse:quartz_structure",
+    "infinity_nexus_greenhouse:diamond_structure",
+    "infinity_nexus_greenhouse:emerald_structure",
+    "infinity_nexus_greenhouse:netherite_structure",
+    "infinity_nexus_greenhouse:white_light_crystal",
+    "infinity_nexus_greenhouse:purple_light_crystal",
+    "infinity_nexus_greenhouse:orange_light_crystal",
+    "infinity_nexus_greenhouse:yellow_light_crystal",
+    "infinity_nexus_greenhouse:green_light_crystal",
+    "infinity_nexus_greenhouse:blue_light_crystal",
+    "infinity_nexus_greenhouse:pink_light_crystal",
+    "infinity_nexus_greenhouse:red_light_crystal",
+
+    "infinity_nexus_greenhouse:ancient_clear_glass",
+    "infinity_nexus_greenhouse:white_clear_glass",
+    "infinity_nexus_greenhouse:purple_clear_glass",
+    "infinity_nexus_greenhouse:orange_clear_glass",
+    "infinity_nexus_greenhouse:yellow_clear_glass",
+    "infinity_nexus_greenhouse:green_clear_glass",
+    "infinity_nexus_greenhouse:blue_clear_glass",
+    "infinity_nexus_greenhouse:pink_clear_glass",
+    "infinity_nexus_greenhouse:red_clear_glass",
+    "infinity_nexus_greenhouse:christmas_clear_glass",
+
+    "infinity_nexus_greenhouse:ancient_crystal_block",
+    "infinity_nexus_greenhouse:white_crystal_block",
+    "infinity_nexus_greenhouse:purple_crystal_block",
+    "infinity_nexus_greenhouse:orange_crystal_block",
+    "infinity_nexus_greenhouse:yellow_crystal_block",
+    "infinity_nexus_greenhouse:green_crystal_block",
+    "infinity_nexus_greenhouse:blue_crystal_block",
+    "infinity_nexus_greenhouse:pink_crystal_block",
+    "infinity_nexus_greenhouse:red_crystal_block",
+    "infinity_nexus_greenhouse:christmas_crystal_block"
+  ]
+}
