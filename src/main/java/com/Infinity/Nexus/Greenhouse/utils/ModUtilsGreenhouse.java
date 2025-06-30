@@ -12,6 +12,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -32,19 +33,10 @@ public class ModUtilsGreenhouse {
         List<ItemStack> drops = new ArrayList<>(Block.getDrops(stack, (ServerLevel) level, pos, null, player, pickaxe));
         return drops;
     }
-    public static boolean hasIrrigate(ItemStackHandler itemHandler, int[] upgradeSlots) {
+    public static boolean hasUpgrade(ItemStackHandler itemHandler, int[] upgradeSlots, Item upgrade) {
         for (int upgradeSlot : upgradeSlots) {
             ItemStack stack = itemHandler.getStackInSlot(upgradeSlot);
-            if (stack.getItem() == ModItemsGreenhouse.IRRIGATE_UPGRADE.get()) {
-                return true;
-            }
-        }
-        return false;
-    }
-    public static boolean hasPlanter(ItemStackHandler itemHandler, int[] upgradeSlots) {
-        for (int upgradeSlot : upgradeSlots) {
-            ItemStack stack = itemHandler.getStackInSlot(upgradeSlot);
-            if (stack.getItem() == ModItemsGreenhouse.PLANTER_UPGRADE.get()) {
+            if (stack.getItem() == upgrade) {
                 return true;
             }
         }
@@ -85,7 +77,7 @@ public class ModUtilsGreenhouse {
     }
 
     public static void showInfo(ServerLevel serverLevel, BlockPos pPos, ServerPlayer player, int maxBlocks) {
-        Set<BlockPos> area = GetInteriorArea.computeInteriorArea(serverLevel, pPos, maxBlocks).interiorBlocks;
+        Set<BlockPos> area = GetInteriorArea.computeInteriorArea(serverLevel, pPos, maxBlocks, false).interiorBlocks;
 
         // Count blocks efficiently using merge
         Map<String, Integer> blockCounts = new HashMap<>();

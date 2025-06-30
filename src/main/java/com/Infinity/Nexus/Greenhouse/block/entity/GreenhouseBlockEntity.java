@@ -35,6 +35,8 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.*;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -44,6 +46,7 @@ import net.minecraft.world.item.BoneMealItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.block.*;
@@ -159,7 +162,7 @@ public class GreenhouseBlockEntity extends BlockEntity implements MenuProvider {
 
             @Override
             public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
-                if (slot < 0) {
+                if (slot <= 8) {
                     return stack;
                 }
                 return super.insertItem(slot, stack, simulate);
@@ -202,7 +205,7 @@ public class GreenhouseBlockEntity extends BlockEntity implements MenuProvider {
         if (level.isClientSide) {
             return;
         }
-        FluidUtils.fillFluidToTank(fluidStorage, new FluidStack(Fluids.WATER, 10));
+        //FluidUtils.fillFluidToTank(fluidStorage, new FluidStack(Fluids.WATER, 10));
 
         int machineLevel = Math.max(getMachineLevel() - 1, 0);
 
@@ -250,7 +253,7 @@ public class GreenhouseBlockEntity extends BlockEntity implements MenuProvider {
         containerData.set(DATA_SLOT_FREE, 1);
 
         //Plants
-        GetInteriorArea.InteriorAreaResult result = GetInteriorArea.computeInteriorArea(level, worldPosition, ModUtilsGreenhouse.getAreaByTier(machineLevel));
+        GetInteriorArea.InteriorAreaResult result = GetInteriorArea.computeInteriorArea(level, worldPosition, ModUtilsGreenhouse.getAreaByTier(machineLevel), true);
         List<BlockPos> plants = result.interiorBlocks.stream().filter(plant -> level.getBlockState(plant) != Blocks.AIR.defaultBlockState()).toList();
         containerData.set(DATA_PLANTS, plants.size() - 1);
         containerData.set(DATA_SIZE, result.interiorBlocks.size());
@@ -325,7 +328,7 @@ public class GreenhouseBlockEntity extends BlockEntity implements MenuProvider {
                 continue;
             }
 
-            if (fluidStorage.getFluidAmount() <= 0 && !ModUtilsGreenhouse.hasIrrigate(itemHandler, UPGRADE_SLOTS)) continue;
+            if (fluidStorage.getFluidAmount() <= 0 && !ModUtilsGreenhouse.hasUpgrade(itemHandler, UPGRADE_SLOTS, ModItemsGreenhouse.IRRIGATE_UPGRADE.get())) continue;
             if (state.hasProperty(FarmBlock.MOISTURE)) {
                 int moisture = state.getValue(FarmBlock.MOISTURE);
                 if (moisture < FarmBlock.MAX_MOISTURE) {
@@ -448,17 +451,19 @@ public class GreenhouseBlockEntity extends BlockEntity implements MenuProvider {
         }
     }
 
-    private void selfInsertItems(ItemStack stack){
+    private boolean selfInsertItems(ItemStack stack){
         verifySolidFuel();
         for(int slot : OUTPUT_SLOTS){
             if(ItemStackHandlerUtils.canInsertItemAndAmountIntoOutputSlot(stack.getItem(), stack.getCount(), slot, itemHandler)){
                 ItemStackHandlerUtils.insertItem(slot, stack, false, itemHandler);
                 if(slot == OUTPUT_SLOTS.length -1){
                     sendItems(level);
+                    break;
                 }
-                break;
+                return true;
             }
         }
+        return false;
     }
 
     private void processCrops(GetInteriorArea.InteriorAreaResult result, List<BlockPos> farmBlocks) {
@@ -493,7 +498,7 @@ public class GreenhouseBlockEntity extends BlockEntity implements MenuProvider {
 
     private void plantSeeds(List<BlockPos> farmBlocks) {
         IFFakePlayer fakePlayer = GetFakePlayer.get((ServerLevel) level);
-        if(!ModUtilsGreenhouse.hasPlanter(itemHandler, UPGRADE_SLOTS)){
+        if(!ModUtilsGreenhouse.hasUpgrade(itemHandler, UPGRADE_SLOTS, ModItemsGreenhouse.PLANTER_UPGRADE.get())){
             return;
         }
         for (BlockPos pos : farmBlocks) {
@@ -631,7 +636,7 @@ public class GreenhouseBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     private boolean hasEmptySlot() {
-        for (int slot = 0; slot < OUTPUT_SLOTS.length - 1; slot++) {
+        for (int slot = 0; slot < OUTPUT_SLOTS.length; slot++) {
             if (itemHandler.getStackInSlot(slot).isEmpty()) {
                 return true;
             }
@@ -851,7 +856,7 @@ public class GreenhouseBlockEntity extends BlockEntity implements MenuProvider {
         }
         if(level instanceof ServerLevel serverLevel){
             int tier = this.getMachineLevel() -1;
-            GetInteriorArea.InteriorAreaResult result = GetInteriorArea.computeInteriorArea(level, worldPosition, ModUtilsGreenhouse.getAreaByTier(tier));
+            GetInteriorArea.InteriorAreaResult result = GetInteriorArea.computeInteriorArea(level, worldPosition, ModUtilsGreenhouse.getAreaByTier(tier), false);
             Set<BlockPos> area = result.interiorBlocks;
             boolean isSealed = result.isSealed;
 
@@ -865,8 +870,21 @@ public class GreenhouseBlockEntity extends BlockEntity implements MenuProvider {
         }
     }
 
-    // ============ Inner Classes ============
+    public void collectItems(List<ItemEntity> items) {
+        for(ItemEntity item : items) {
+            if (!ModUtilsGreenhouse.hasUpgrade(itemHandler, UPGRADE_SLOTS, ModItemsGreenhouse.COLLECTOR_UPGRADE.get())) {
+                Direction greenhouseFace = this.getBlockState().getValue(Greenhouse.FACING);
+                BlockPos greenhousePos = getBlockPos().relative(greenhouseFace);
+                item.setPos(new Vec3(greenhousePos.getX() + 0.5, greenhousePos.getY() + 1, greenhousePos.getZ() + 0.5));
+            }
+            ItemStack stack = item.getItem();
+            if(selfInsertItems(stack)){
+                item.remove(Entity.RemovalReason.DISCARDED);
+            }
+        }
+    }
 
+    // ============ Inner Classes ============
     private class GreenhouseContainerData implements ContainerData {
         private final int[] data = new int[19];
 

@@ -18,6 +18,8 @@ public class ModItemsGreenhouse {
             new UpgradeItem(new Item.Properties().rarity(Rarity.COMMON).stacksTo(1)));
     public static final DeferredItem<Item> PLANTER_UPGRADE = ITEMS.register("planter_upgrade",() ->
             new UpgradeItem(new Item.Properties().rarity(Rarity.COMMON).stacksTo(1)));
+    public static final DeferredItem<Item> COLLECTOR_UPGRADE = ITEMS.register("collector_upgrade",() ->
+            new UpgradeItem(new Item.Properties().rarity(Rarity.COMMON).stacksTo(1)));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

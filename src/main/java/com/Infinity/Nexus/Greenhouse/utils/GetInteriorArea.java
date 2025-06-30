@@ -1,14 +1,20 @@
 package com.Infinity.Nexus.Greenhouse.utils;
 
 import com.Infinity.Nexus.Greenhouse.block.ModBlocksGreenhouse;
+import com.Infinity.Nexus.Greenhouse.block.custom.Greenhouse;
+import com.Infinity.Nexus.Greenhouse.block.entity.GreenhouseBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.*;
 
@@ -28,7 +34,7 @@ public class GetInteriorArea {
         }
     }
 
-    public static InteriorAreaResult computeInteriorArea(Level level, BlockPos start, int maxBlocks) {
+    public static InteriorAreaResult computeInteriorArea(Level level, BlockPos start, int maxBlocks, boolean self) {
         MAX_AIR_BLOCKS = maxBlocks;
         boolean hasVillager = false;
         Set<BlockPos> visited = new HashSet<>();
@@ -65,11 +71,27 @@ public class GetInteriorArea {
 
         farmlands.addAll(visited);
         AABB bounds = getBoundingBox(farmlands);
-
-        hasVillager = !level.getEntitiesOfClass(Villager.class, bounds, e -> {
-            BlockPos villagerBlockPos = e.blockPosition();
-            return  (farmlands.contains(villagerBlockPos)) && e.getVillagerData().getProfession() == VillagerProfession.FARMER;
+        List<ItemEntity> items = new ArrayList<>();
+        boolean isGreenhouse = level.getBlockEntity(start) instanceof GreenhouseBlockEntity;
+        hasVillager = !level.getEntitiesOfClass(Entity.class, bounds, e -> {
+            if(e instanceof Villager villager){
+                BlockPos villagerBlockPos = e.blockPosition();
+                return  (farmlands.contains(villagerBlockPos)) && villager.getVillagerData().getProfession() == VillagerProfession.FARMER;
+            }
+            if(!(e instanceof ItemEntity item && isGreenhouse && self)){
+                return false;
+            }
+            if(item.hasPickUpDelay()){
+                return false;
+            }
+            item.setPickUpDelay(10);
+            items.add(item);
+            return false;
         }).isEmpty();
+
+        if(level.getBlockEntity(start) instanceof GreenhouseBlockEntity greenhouse && self){
+            greenhouse.collectItems(items);
+        }
 
         return new InteriorAreaResult(true, hasVillager, visited);
     }
@@ -102,7 +124,7 @@ public class GetInteriorArea {
         );
     }
     public static int getArea(Level level, BlockPos start, int maxBlocks) {
-        InteriorAreaResult result = computeInteriorArea(level, start, maxBlocks);
+        InteriorAreaResult result = computeInteriorArea(level, start, maxBlocks, false);
         return result.isSealed ? result.interiorBlocks.size() : 0;
     }
     private static boolean isInteriorBlock(BlockState state) {
