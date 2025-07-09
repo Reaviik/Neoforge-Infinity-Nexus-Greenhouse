@@ -140,7 +140,7 @@ dependencies {
     // For more info:
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
-    implementation 'com.nexus:infinity_nexus_core:4.0.5-1.21.x'
+    implementation 'com.nexus:infinity_nexus_core:4.0.6-1.21.x'
     implementation "curse.maven:jade-324717:5591256"
     //compileOnly "curse.maven:guideme-1173950:6688687"
     //implementation "curse.maven:jade-324717:6667790"

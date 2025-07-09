@@ -78,10 +78,12 @@ public record GreenhouseRecipe(Integer energy, Integer size, Ingredient tier, St
         return ModRecipes.GREENHOUSE_RECIPE_TYPE.get();
     }
 
-    public List<ItemStack> getRandomResults(float rd) {
+    public List<ItemStack> getRandomResults(float bonusChance) {
         List<ItemStack> results = new ArrayList<>();
         for (int i = 1; i < outputs.size(); i++) {
-            if (rd <= outputs.get(i).chance()) {
+            float chance = outputs.get(i).chance();
+            float finalChance = Math.min(chance * (1 + bonusChance), 1.0f);
+            if (Math.random() <= finalChance) {
                 results.add(outputs.get(i).stack().copy());
             }
         }

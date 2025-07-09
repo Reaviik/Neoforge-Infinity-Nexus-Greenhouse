@@ -29,6 +29,7 @@ public class ModTab {
                         pOutput.accept(new ItemStack(ModItemsGreenhouse.IRRIGATE_UPGRADE.get()));
                         pOutput.accept(new ItemStack(ModItemsGreenhouse.PLANTER_UPGRADE.get()));
                         pOutput.accept(new ItemStack(ModItemsGreenhouse.COLLECTOR_UPGRADE.get()));
+                        pOutput.accept(new ItemStack(ModItemsGreenhouse.SECONDARY_OUTPUT_UPGRADE.get()));
                         //-------------------------//-------------------------//
 
                     })

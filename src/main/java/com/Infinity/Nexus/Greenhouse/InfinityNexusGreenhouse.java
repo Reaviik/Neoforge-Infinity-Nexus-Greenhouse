@@ -58,7 +58,7 @@ public class InfinityNexusGreenhouse
     }
     private void commonSetup(final FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
-            // ModMessages.register();
+            //ModMessages.register(event);
         });
     }
     private void registerScreens(RegisterMenuScreensEvent event) {

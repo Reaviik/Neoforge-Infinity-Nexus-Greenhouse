@@ -26,11 +26,15 @@ public class GetInteriorArea {
         public final boolean isSealed;
         public final boolean hasVillager;
         public final Set<BlockPos> interiorBlocks;
+        public final List<BlockPos> plants;
+        public final Set<BlockPos> farmlands;
 
-        public InteriorAreaResult(boolean isSealed, boolean hasVillager, Set<BlockPos> interiorBlocks) {
+        public InteriorAreaResult(boolean isSealed, boolean hasVillager, Set<BlockPos> interiorBlocks, List<BlockPos> plants, Set<BlockPos> farmlands) {
             this.isSealed = isSealed;
             this.hasVillager = hasVillager;
             this.interiorBlocks = interiorBlocks;
+            this.plants = plants;
+            this.farmlands = farmlands;
         }
     }
 
@@ -50,7 +54,7 @@ public class GetInteriorArea {
                 BlockPos neighbor = current.relative(dir);
 
                 if (visited.contains(neighbor)) continue;
-                if (!level.isLoaded(neighbor)) return new InteriorAreaResult(false, hasVillager, visited);
+                if (!level.isLoaded(neighbor)) return new InteriorAreaResult(false, hasVillager, visited, new ArrayList<>(), farmlands);
 
                 int distance = Math.max(Math.max(Math.abs(start.getX() - neighbor.getX()),
                                 Math.abs(start.getY() - neighbor.getY())),
@@ -62,15 +66,17 @@ public class GetInteriorArea {
                     queue.add(neighbor);
                     visited.add(neighbor);
                     if (visited.size() > MAX_AIR_BLOCKS)
-                        return new InteriorAreaResult(false, hasVillager, visited);
-                }else if(state.getBlock() instanceof FarmBlock || state.getBlock() instanceof SoulSandBlock){
+                        return new InteriorAreaResult(false, hasVillager, visited, new ArrayList<>(), farmlands);
+                }else if(state.getBlock() instanceof FarmBlock
+                        || state.getBlock() instanceof SoulSandBlock
+                        || state.is(Blocks.DIRT)
+                        || state.is(Blocks.GRASS_BLOCK)){
                     farmlands.add(neighbor);
                 }
             }
         }
 
-        farmlands.addAll(visited);
-        AABB bounds = getBoundingBox(farmlands);
+        AABB bounds = getBoundingBox(farmlands, visited);
         List<ItemEntity> items = new ArrayList<>();
         boolean isGreenhouse = level.getBlockEntity(start) instanceof GreenhouseBlockEntity;
         hasVillager = !level.getEntitiesOfClass(Entity.class, bounds, e -> {
@@ -93,12 +99,20 @@ public class GetInteriorArea {
             greenhouse.collectItems(items);
         }
 
-        return new InteriorAreaResult(true, hasVillager, visited);
+        List<BlockPos> plants = visited.stream().filter(plant ->
+                !(level.getBlockState(plant).isAir()
+                        && level.getBlockState(plant).is(Blocks.WATER)
+                        && level.getBlockState(plant).is(ModBlocksGreenhouse.GREENHOUSE)
+                )
+        ).toList();
+
+        return new InteriorAreaResult(true, hasVillager, visited, plants, farmlands);
     }
 
 
-    private static AABB getBoundingBox(Set<BlockPos> positions) {
-        if (positions.isEmpty()) {
+    private static AABB getBoundingBox(Set<BlockPos> positions1, Set<BlockPos> positions2) {
+        positions1.addAll(positions2);
+        if (positions1.isEmpty()) {
             return new AABB(0, 0, 0, 0, 0, 0);
         }
 
@@ -109,7 +123,7 @@ public class GetInteriorArea {
         int maxY = Integer.MIN_VALUE;
         int maxZ = Integer.MIN_VALUE;
 
-        for (BlockPos pos : positions) {
+        for (BlockPos pos : positions1) {
             minX = Math.min(minX, pos.getX());
             minY = Math.min(minY, pos.getY());
             minZ = Math.min(minZ, pos.getZ());

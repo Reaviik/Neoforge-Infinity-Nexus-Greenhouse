@@ -1,0 +1,31 @@
+{
+  "type": "infinity_nexus_greenhouse:greenhouse",
+  "energy": 100,
+  "size": 0,
+  "plant": "mysticalagriculture:silicon_crop",
+  "properties": [
+    {
+      "property": "age=7",
+      "replace": "none"
+    }
+  ],
+  "ingredient": {
+    "tag": "infinity_nexus_core:up_1"
+  },
+  "outputs": [
+    {
+      "item": "mysticalagriculture:silicon_essence",
+      "chance": 1.0
+    },
+    {
+      "item": "mysticalagriculture:fertilized_essence",
+      "chance": 0.1
+    }
+  ],
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "mysticalagriculture"
+    }
+  ]
+}
