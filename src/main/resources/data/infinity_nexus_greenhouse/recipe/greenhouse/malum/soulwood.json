@@ -1,0 +1,32 @@
+{
+  "type": "infinity_nexus_greenhouse:greenhouse",
+  "energy": 100,
+  "size": 0,
+  "plant": "malum:soulwood_sapling",
+  "properties": [
+    {
+      "property": "stage=0",
+      "replace": "none"
+    }
+  ],
+  "ingredient": {
+    "tag": "infinity_nexus_core:up_1"
+  },
+  "outputs": [
+    { "item": "malum:soulwoo_log", "chance": 1.0 },
+    { "item": "malum:soulwoo", "chance": 0.4 },
+    { "item": "malum:exposed_soulwoo_log", "chance": 0.2 },
+    { "item": "malum:soulwoo_leaves", "chance": 0.15 },
+    { "item": "malum:hanging_soulwoo_leaves", "chance": 0.1 },
+    { "item": "malum:blighted_soulwoo", "chance": 0.04 },
+    { "item": "malum:blighted_gunk", "chance": 0.02 },
+    { "item": "malum:blightedpearl", "chance": 0.01 },
+    { "item": "malum:blightedroot", "chance": 0.01 }
+  ],
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "malum"
+    }
+  ]
+}

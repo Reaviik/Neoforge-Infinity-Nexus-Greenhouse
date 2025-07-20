@@ -10,11 +10,20 @@
   "tooltip.infinity_nexus_greenhouse.fuel_slot_tooltip": "Fuel Slot",
   "tooltip.infinity_nexus.chance": "§bChance: ",
   "tooltip.infinity_nexus_greenhouse.greenhouse_description": "Place this machine in a sealed area and meet the requirements",
+  "tooltip.infinity_nexus_greenhouse.fertilizer_upgrade": "This upgrade allows the greenhouse to automatically fertilize crops as long as the fertilizer slot is not empty",
+  "tooltip.infinity_nexus_greenhouse.irrigate_upgrade": "This upgrade enables the greenhouse to automatically hydrate crops while its internal water tank contains water",
+  "tooltip.infinity_nexus_greenhouse.planter_upgrade": "This upgrade makes the greenhouse automatically plant new seeds when they are placed in the seed slot",
+  "tooltip.infinity_nexus_greenhouse.collector_upgrade": "This upgrade lets the greenhouse collect items within its area and store them in its internal inventory",
+  "tooltip.infinity_nexus_greenhouse.secondary_output_upgrade": "This upgrade increases the number of secondary outputs by 25% for each upgrade",
+  "tooltip.infinity_nexus_greenhouse.upgrade_no_additional_speed": "§eThis upgrade does not provide any additional speed boost",
 
   "block.infinity_nexus_greenhouse.greenhouse": "Greenhouse",
 
   "item.infinity_nexus_greenhouse.fertilizer_upgrade": "Fertilizer Upgrade",
   "item.infinity_nexus_greenhouse.irrigate_upgrade": "Irrigation Upgrade",
+  "item.infinity_nexus_greenhouse.planter_upgrade": "Planter Upgrade",
+  "item.infinity_nexus_greenhouse.collector_upgrade": "Collector Upgrade",
+  "item.infinity_nexus_greenhouse.secondary_output_upgrade": "Secondary Output Upgrade",
 
   "infinity_nexus_mod.jei_information": "§9This machine requires a component to function.",
 
@@ -47,5 +56,7 @@
   "advancement.infinity_nexus_greenhouse.fertilizer": "Auto-Fertilization!",
   "advancement.infinity_nexus_greenhouse.fertilizer_description": "Now you can speed up plant growth automatically by using fertilizers",
   "advancement.infinity_nexus_greenhouse.planter": "Autonomous Farming",
-  "advancement.infinity_nexus_greenhouse.planter_description": "Seeds in the planting slot are automatically planted on farmland inside the greenhouse"
+  "advancement.infinity_nexus_greenhouse.planter_description": "Seeds in the planting slot are automatically planted on farmland inside the greenhouse",
+  "advancement.infinity_nexus_greenhouse.collector": "Auto-Collector",
+  "advancement.infinity_nexus_greenhouse.collector_description": "Agora items dropados dentro da area não são mais apenas agrupados em frente a estuga e sim coletados para o inventario"
 }

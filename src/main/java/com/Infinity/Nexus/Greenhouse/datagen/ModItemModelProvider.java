@@ -18,5 +18,6 @@ public class ModItemModelProvider extends ItemModelProvider {
         basicItem(ModItemsGreenhouse.IRRIGATE_UPGRADE.get());
         basicItem(ModItemsGreenhouse.PLANTER_UPGRADE.get());
         basicItem(ModItemsGreenhouse.COLLECTOR_UPGRADE.get());
+        basicItem(ModItemsGreenhouse.SECONDARY_OUTPUT_UPGRADE.get());
     }
 }

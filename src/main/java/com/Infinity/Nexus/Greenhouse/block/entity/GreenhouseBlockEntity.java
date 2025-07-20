@@ -108,7 +108,7 @@ public class GreenhouseBlockEntity extends BlockEntity implements MenuProvider {
     private static final int ENERGY_TRANSFER = Config.greenhouse_energy_transfer;
     private static final int FLUID_STORAGE_CAPACITY = Config.greenhouse_fluid_storage_capacity;
     private static final int MAX_CROPS_BASE = 1;
-    private static final int PROGRESS_DEFAULT = 120;
+    private static final int PROGRESS_DEFAULT = 60;
     private static final int LIT_OFFSET = 9;
 
 
@@ -146,7 +146,7 @@ public class GreenhouseBlockEntity extends BlockEntity implements MenuProvider {
                     case 14 -> stack.is(ItemTags.HOES);
                     case 15 -> stack.is(ModItems.LINKING_TOOL.get().asItem());
                     case 16 -> stack.getBurnTime(RecipeType.SMELTING) > 0;
-                    case 17 -> stack.is(Tags.Items.FERTILIZERS);
+                    case 17 -> stack.getItem() instanceof BoneMealItem;
                     case 18 -> stack.is(Tags.Items.SEEDS) || stack.is(Tags.Items.CROPS);
                     default -> super.isItemValid(slot, stack);
                 };
@@ -254,7 +254,7 @@ public class GreenhouseBlockEntity extends BlockEntity implements MenuProvider {
 
         //Plants
         GetInteriorArea.InteriorAreaResult result = GetInteriorArea.computeInteriorArea(level, worldPosition, ModUtilsGreenhouse.getAreaByTier(machineLevel), true);
-        List<BlockPos> plants = result.interiorBlocks.stream().filter(plant -> level.getBlockState(plant) != Blocks.AIR.defaultBlockState()).toList();
+        List<BlockPos> plants = result.plants;
         containerData.set(DATA_PLANTS, plants.size() - 1);
         containerData.set(DATA_SIZE, result.interiorBlocks.size());
         containerData.set(DATA_STRUCTURE, result.isSealed ? 1 : 0);
@@ -263,7 +263,7 @@ public class GreenhouseBlockEntity extends BlockEntity implements MenuProvider {
             updateBlockState(state, pos, machineLevel);
             return;
         }
-        humidify(plants);
+        humidify(result.farmlands);
 
         //Light
         updateLightLevel(pos);
@@ -319,21 +319,24 @@ public class GreenhouseBlockEntity extends BlockEntity implements MenuProvider {
 
     // ============ Operações de Agricultura ============
 
-    private void humidify(List<BlockPos> farmBlocks) {
+    private void humidify(Set<BlockPos> farmBlocks) {
         if (farmBlocks.isEmpty()) return;
         for (BlockPos pos : farmBlocks) {
             BlockState state = level.getBlockState(pos.below());
             if ((state.is(Blocks.DIRT) || state.is(Blocks.GRASS_BLOCK)) && itemHandler.getStackInSlot(HOE_SLOT).is(ItemTags.HOES)) {
                 level.setBlock(pos.below(), Blocks.FARMLAND.defaultBlockState(), 3);
-                continue;
             }
 
-            if (fluidStorage.getFluidAmount() <= 0 && !ModUtilsGreenhouse.hasUpgrade(itemHandler, UPGRADE_SLOTS, ModItemsGreenhouse.IRRIGATE_UPGRADE.get())) continue;
+            if (fluidStorage.getFluidAmount() <= 0 || !ModUtilsGreenhouse.hasUpgrade(itemHandler, UPGRADE_SLOTS, ModItemsGreenhouse.IRRIGATE_UPGRADE.get())){
+                continue;
+            }
             if (state.hasProperty(FarmBlock.MOISTURE)) {
                 int moisture = state.getValue(FarmBlock.MOISTURE);
+                int maxMoisture = FarmBlock.MAX_MOISTURE;
                 if (moisture < FarmBlock.MAX_MOISTURE) {
-                    level.setBlock(pos.below(), state.setValue(FarmBlock.MOISTURE, moisture + 1), 3);
-                    FluidUtils.drainFluidFromTank(fluidStorage, containerData.get(DATA_PLANTS));
+                    int irrigated = maxMoisture - moisture;
+                    level.setBlock(pos.below(), state.setValue(FarmBlock.MOISTURE, moisture + irrigated), 3);
+                    FluidUtils.drainFluidFromTank(fluidStorage, irrigated);
                 }
             }
         }
@@ -416,17 +419,20 @@ public class GreenhouseBlockEntity extends BlockEntity implements MenuProvider {
                 selfInsertItems(recipe.get().value().getResultItem(level.registryAccess()));
             }
 
-            List<ItemStack> secondary = recipe.get().value().getRandomResults(rd);
-            for (ItemStack secondaryStack : secondary) {
-                selfInsertItems(secondaryStack);
-            }
+            processSecondaryDrops(recipe);
             return;
         }
 
         boolean foundOutputInDrops = false;
 
         for (ItemStack stack : drops) {
-            if (!Config.greenhouse_harvest_seeds && (stack.is(Tags.Items.SEEDS) || stack.is(ItemTags.SAPLINGS))) {
+            if (!Config.greenhouse_harvest_seeds && (
+                    stack.is(Tags.Items.SEEDS)
+                    || stack.is(ItemTags.SAPLINGS)
+                    || stack.is(Tags.Items.CROPS)
+                    || stack.getTags().anyMatch(tag -> tag.equals("c:seeds"))
+                    || stack.getDescriptionId().contains("seed"))
+            ) {
                 continue;
             }
             ItemStack output = recipe.get().value().getResultItem(level.registryAccess());
@@ -437,17 +443,22 @@ public class GreenhouseBlockEntity extends BlockEntity implements MenuProvider {
             if(rd <= primaryChance){
                 selfInsertItems(stack);
             }
-
-            List<ItemStack> secondary = recipe.get().value().getRandomResults(rd);
-            for(ItemStack secondaryStack : secondary){
-                selfInsertItems(secondaryStack);
-            }
         }
+        processSecondaryDrops(recipe);
 
         if (!foundOutputInDrops) {
             if (rd <= primaryChance) {
                 selfInsertItems(recipe.get().value().getResultItem(level.registryAccess()));
             }
+        }
+    }
+
+    private void processSecondaryDrops(Optional<RecipeHolder<GreenhouseRecipe>> recipe) {
+        int secondaryUpgrade = ModUtilsGreenhouse.getUpgradeCount(itemHandler, UPGRADE_SLOTS, ModItemsGreenhouse.SECONDARY_OUTPUT_UPGRADE.get());
+        float bonusChance = 0.25f * secondaryUpgrade;
+        List<ItemStack> secondary = recipe.get().value().getRandomResults(bonusChance);
+        for (ItemStack secondaryStack : secondary) {
+            selfInsertItems(secondaryStack);
         }
     }
 
@@ -875,7 +886,11 @@ public class GreenhouseBlockEntity extends BlockEntity implements MenuProvider {
             if (!ModUtilsGreenhouse.hasUpgrade(itemHandler, UPGRADE_SLOTS, ModItemsGreenhouse.COLLECTOR_UPGRADE.get())) {
                 Direction greenhouseFace = this.getBlockState().getValue(Greenhouse.FACING);
                 BlockPos greenhousePos = getBlockPos().relative(greenhouseFace);
-                item.setPos(new Vec3(greenhousePos.getX() + 0.5, greenhousePos.getY() + 1, greenhousePos.getZ() + 0.5));
+                if(item.position().distanceToSqr(greenhousePos.getCenter()) <= 0.25) {
+                    continue;
+                }
+                item.setPos(new Vec3(greenhousePos.getX() + 0.5, greenhousePos.getY() + 0.5, greenhousePos.getZ() + 0.5));
+                return;
             }
             ItemStack stack = item.getItem();
             if(selfInsertItems(stack)){
@@ -917,7 +932,8 @@ public class GreenhouseBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     public String setOwnerName() {
-        return ModUtilsGreenhouse.getOwnerName(this.level, owner).getName().getString();
+        Player player = ModUtilsGreenhouse.getOwnerName(level, owner);
+        return player == null ? "" : player.getName().getString();
     }
 
     //---------------------------------------Jade----------------------------------------//

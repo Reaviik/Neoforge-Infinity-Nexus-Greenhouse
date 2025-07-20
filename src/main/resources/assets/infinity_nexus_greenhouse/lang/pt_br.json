@@ -10,11 +10,20 @@
   "tooltip.infinity_nexus_greenhouse.fuel_slot_tooltip": "Slot de Combustível",
   "tooltip.infinity_nexus.chance": "Chance: ",
   "tooltip.infinity_nexus_greenhouse.greenhouse_description": "Coloque a estufa dentro de uma área selada e cumpra os requisitos",
+  "tooltip.infinity_nexus_greenhouse.fertilizer_upgrade": "Este upgrade permite que a estufa fertilize as plantações automaticamente enquanto o slot de fertilizante não estiver vazio",
+  "tooltip.infinity_nexus_greenhouse.irrigate_upgrade": "Este upgrade permite que a estufa irrigue as plantações automaticamente enquanto o tanque interno contiver água",
+  "tooltip.infinity_nexus_greenhouse.planter_upgrade": "Este upgrade permite que a estufa plante novas sementes automaticamente quando elas estiverem no slot de sementes",
+  "tooltip.infinity_nexus_greenhouse.collector_upgrade": "Este upgrade permite que a estufa colete os itens dentro da área e os armazene em seu inventário interno",
+  "tooltip.infinity_nexus_greenhouse.secondary_output_upgrade": "Este upgrade multiplica a chance de obter itens secundario em 25% para cada upgrade",
+  "tooltip.infinity_nexus_greenhouse.upgrade_no_additional_speed": "§eEste upgrade não fornece aumento adicional de velocidade",
 
   "block.infinity_nexus_greenhouse.greenhouse": "Estufa",
 
   "item.infinity_nexus_greenhouse.fertilizer_upgrade": "Upgrade de Fertilizante",
   "item.infinity_nexus_greenhouse.irrigate_upgrade": "Upgrade de Irrigação",
+  "item.infinity_nexus_greenhouse.planter_upgrade": "Upgrade de Plantação",
+  "item.infinity_nexus_greenhouse.collector_upgrade": "Upgrade de Coleta",
+  "item.infinity_nexus_greenhouse.secondary_output_upgrade": "Upgrade de Saída Secundária",
 
   "infinity_nexus_mod.jei_information": "§9Esta máquina precisa de um componente para funcionar.",
 
@@ -47,5 +56,7 @@
   "advancement.infinity_nexus_greenhouse.fertilizer": "Fertilização automática!",
   "advancement.infinity_nexus_greenhouse.fertilizer_description": "Agora você pode acelerar o crescimento das plantas automaticamente utilizando fertilizantes",
   "advancement.infinity_nexus_greenhouse.planter": "Plantação automática",
-  "advancement.infinity_nexus_greenhouse.planter_description": "Sementes no slot de plantação são plantadas automaticamente nas terras aradas dentro da estufa"
+  "advancement.infinity_nexus_greenhouse.planter_description": "Sementes no slot de plantação são plantadas automaticamente nas terras aradas dentro da estufa",
+  "advancement.infinity_nexus_greenhouse.collector": "Coleta automática",
+  "advancement.infinity_nexus_greenhouse.collector_description": "Agora items dropados dentro da area não são mais apenas agrupados em frente a estuga e sim coletados para o inventario"
 }

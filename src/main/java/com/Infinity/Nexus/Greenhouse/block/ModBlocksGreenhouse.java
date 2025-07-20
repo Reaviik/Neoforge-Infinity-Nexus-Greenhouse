@@ -18,7 +18,7 @@ import java.util.function.Supplier;
 public class ModBlocksGreenhouse {
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(InfinityNexusGreenhouse.MOD_ID);
     public static final DeferredBlock<Block> GREENHOUSE = registerBlock("greenhouse", () ->
-            new Greenhouse(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).requiresCorrectToolForDrops().strength(3.0f, 6.0f)
+            new Greenhouse(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).requiresCorrectToolForDrops().strength(1.0f, 6.0f)
                     .lightLevel((state) -> state.getValue(Greenhouse.LIT) >= 8 ? 2 : 0).noOcclusion().mapColor(MapColor.METAL)));
 
 

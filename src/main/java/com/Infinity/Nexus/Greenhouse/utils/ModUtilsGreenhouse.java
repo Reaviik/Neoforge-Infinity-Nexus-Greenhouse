@@ -1,8 +1,8 @@
 package com.Infinity.Nexus.Greenhouse.utils;
 
 import com.Infinity.Nexus.Core.fakePlayer.IFFakePlayer;
+import com.Infinity.Nexus.Greenhouse.block.ModBlocksGreenhouse;
 import com.Infinity.Nexus.Greenhouse.config.Config;
-import com.Infinity.Nexus.Greenhouse.item.ModItemsGreenhouse;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.ClickEvent;
@@ -16,10 +16,12 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.items.ItemStackHandler;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
 public class ModUtilsGreenhouse {
@@ -41,6 +43,17 @@ public class ModUtilsGreenhouse {
             }
         }
         return false;
+    }
+
+    public static int getUpgradeCount(ItemStackHandler itemHandler, int[] upgradeSlots, Item upgrade) {
+        int count = 0;
+        for (int upgradeSlot : upgradeSlots) {
+            ItemStack stack = itemHandler.getStackInSlot(upgradeSlot);
+            if (stack.getItem() == upgrade) {
+                count += stack.getCount();
+            }
+        }
+        return Math.min(count, 4);
     }
 
     public static int notifyOwner(BlockPos pPos, Level level, String owner, int delay) {
@@ -77,11 +90,18 @@ public class ModUtilsGreenhouse {
     }
 
     public static void showInfo(ServerLevel serverLevel, BlockPos pPos, ServerPlayer player, int maxBlocks) {
-        Set<BlockPos> area = GetInteriorArea.computeInteriorArea(serverLevel, pPos, maxBlocks, false).interiorBlocks;
+        GetInteriorArea.InteriorAreaResult result = GetInteriorArea.computeInteriorArea(serverLevel, pPos, maxBlocks, false);
+        List<BlockPos> plants = result.interiorBlocks.stream().filter(plant ->
+                (!serverLevel.getBlockState(plant).isAir()
+                && !serverLevel.getBlockState(plant).is(Blocks.WATER)
+                && !serverLevel.getBlockState(plant).is(ModBlocksGreenhouse.GREENHOUSE)
+                )
+        ).toList();
+
 
         // Count blocks efficiently using merge
         Map<String, Integer> blockCounts = new HashMap<>();
-        for (BlockPos pos : area) {
+        for (BlockPos pos : result.interiorBlocks) {
             // Visual particle effect
             serverLevel.sendParticles(
                     player,
@@ -100,26 +120,36 @@ public class ModUtilsGreenhouse {
             blockCounts.merge(blockName, 1, Integer::sum);
         }
 
+
         // Sort blocks by count (descending) and alphabetically
         List<Map.Entry<String, Integer>> sortedBlocks = blockCounts.entrySet()
                 .stream()
                 .sorted(
-                        Map.Entry.<String, Integer>comparingByValue().reversed()
-                                .thenComparing(Map.Entry.comparingByKey())
+                        Map.Entry.<String, Integer>comparingByValue().reversed().thenComparing(Map.Entry.comparingByKey())
                 )
-                .collect(Collectors.toList());
-
+                .toList();
         // Send sorted results to player
         if (sortedBlocks.isEmpty()) {
             player.sendSystemMessage(Component.literal("§cNo blocks found in the area!"));
         } else {
             player.sendSystemMessage(Component.literal("§6=== Greenhouse Block Count ==="));
-            player.sendSystemMessage(Component.literal("§7- §eArea: §b" + area.size() +"/"+ maxBlocks));
+            player.sendSystemMessage(Component.literal("§7- §eArea: §b" + result.interiorBlocks.size() +"/"+ maxBlocks));
+            player.sendSystemMessage(Component.literal("§7- §e"+ Component.translatable("gui.infinity_nexus_greenhouse.plants").getString() + (plants.isEmpty() ? " §4 0" : " §b"+plants.size())));
+            player.sendSystemMessage(Component.literal("§7- §e"+ Component.translatable("gui.infinity_nexus_greenhouse.villager").getString() + (result.hasVillager ?  " §bOk" : "§4 Missing")));
+            player.sendSystemMessage(Component.literal("§7- §eSealed " + (result.isSealed ? "§bYes" : "§4No")));
+            if(sortedBlocks.size() <= 20) {
+                sortedBlocks.forEach(entry -> {
+                    player.sendSystemMessage(
+                            Component.literal("§7- §e" + entry.getKey() + "§7: §b" + entry.getValue())
+                    );
+                });
+                return;
+            }
+            AtomicReference<String> message = new AtomicReference<>("");
             sortedBlocks.forEach(entry -> {
-                player.sendSystemMessage(
-                        Component.literal("§7- §e" + entry.getKey() + "§7: §b" + entry.getValue())
-                );
+                message.set(message.get() +" §b"+ entry.getValue() + "x §e" + entry.getKey() +",");
             });
+            player.sendSystemMessage(Component.literal(message.get()));
         }
     }
 

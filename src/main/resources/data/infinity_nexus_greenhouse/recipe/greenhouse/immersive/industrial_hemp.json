@@ -1,0 +1,31 @@
+{
+  "type": "infinity_nexus_greenhouse:greenhouse",
+  "energy": 100,
+  "size": 0,
+  "plant": "immmersiveengineering:hemp",
+  "properties": [
+    {
+      "property": "age=4",
+      "replace": "none"
+    }
+  ],
+  "ingredient": {
+    "tag": "infinity_nexus_core:up_1"
+  },
+  "outputs": [
+    {
+      "item": "immmersiveengineering:hemp_fiber",
+      "chance": 1.0
+    },
+    {
+      "item": "immmersiveengineering:hemp_fabric",
+      "chance": 0.01
+    }
+  ],
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "immmersiveengineering"
+    }
+  ]
+}
